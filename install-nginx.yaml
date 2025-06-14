@@ -1,6 +1,8 @@
 ---
 - hosts: webserver
   become: yes
+  vars:
+    site_folder: site2
   tasks:
     - name: Install NGINX
       apt:
@@ -12,7 +14,7 @@
         state: started
     - name: Copy custom index.html to NGINX web directory
       copy:
-        src: index.html
+        src: "{{ site_folder }}/index.html"
         dest: /var/www/html/index.html
         owner: www-data
         group: www-data
